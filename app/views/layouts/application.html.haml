@@ -15,12 +15,14 @@
           - Category.all.each do |c| 
             %li= link_to c.name, jobs_path(category: c.name) 
           - if current_user.role == '0'
-            %li= link_to "Admin", root_path
+            %li= link_to "Admin", admin_path
           - if current_user.role == '1'
             %li= link_to "View Jobs", root_path
             %li= link_to "New Job", new_job_path
+            %li= link_to "View Applicants", new_job_path
           - if current_user.role == '2'
-            %li= link_to "View Jobs", root_path
+            %li= link_to "Search Jobs", root_path
+            %li= link_to "Applied Jobs", root_path
       - if current_user
         = link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-text navbar-right navbar-link"
       - else
@@ -30,5 +32,10 @@
         
       
       //= render 'devise/menu/login_items'
+      
+      
   .container
+
     = yield
+    
+
